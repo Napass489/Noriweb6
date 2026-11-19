@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Norivelle</title>
+    <meta name="description" content="Norivelle · จุดเช็คเครดิตและรีวิวร้าน">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Norivelle">
+    <meta property="og:description" content="Norivelle · จุดเช็คเครดิตและรีวิวร้าน">
+    <meta property="og:image" content="https://i.postimg.cc/SNSHFLnk/IMG-7265.png">
+    <meta property="og:image:alt" content="โลโก้ Norivelle">
+    <meta property="og:locale" content="th_TH">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Norivelle">
+    <meta name="twitter:description" content="Norivelle · จุดเช็คเครดิตและรีวิวร้าน">
+    <meta name="twitter:image" content="https://i.postimg.cc/SNSHFLnk/IMG-7265.png">
+    <link rel="icon" href="https://i.postimg.cc/SNSHFLnk/IMG-7265.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tone.js for Cute Pastel Background Music & Chat Sound Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        theme: {
+                            bg: 'var(--th-bg)',        
+                            phoneBg: 'var(--th-phoneBg)',   
+                            lilac: 'var(--th-lilac)',     
+                            lilacMid: 'var(--th-lilacMid)',  
+                            lilacDark: 'var(--th-lilacDark)', 
+                            mint: 'var(--th-mint)',      
+                            mintMid: 'var(--th-mintMid)',   
+                            pinkSoft: 'var(--th-pinkSoft)',  
+                            textMain: '#4A4458',  
+                            textMuted: '#7D7687',
+                            star: '#FFD27D',      
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'], 
+                        cute: ['Mali', 'cursive'],      
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            /* Default Theme Colors */
+            --th-bg: #FDF0F5;
+            --th-phoneBg: #FFF7FC;
+            --th-lilac: #EADDFF;
+            --th-lilacMid: #D0BCFF;
+            --th-lilacDark: #8B6BB1;
+            --th-mint: #FBE0EE;
+            --th-mintMid: #EDB9D6;
+            --th-pinkSoft: #FFD8E4;
+        }
+
+        body {
+            background-color: var(--th-bg);
+            background-image: radial-gradient(circle at top right, var(--th-phoneBg) 0%, var(--th-lilac) 100%);
+            color: theme('colors.theme.textMain');
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; 
+        }
+
+        /* -------------------------------------
+1. PRELOADER (New Pulse Ripple Design)
+           ------------------------------------- */
+        #preloader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: linear-gradient(135deg, var(--th-phoneBg), var(--th-bg));
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease-out, visibility 0.6s;
+        }
+        #preloader.hidden-preloader { opacity: 0; visibility: hidden; }
+
+        .preloader-content {
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column; align-items: center;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+        /* Smooth Floating Circle with Pulse Ripple */
+        .cute-logo-wrapper {
+            position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 24px;
+            width: 90px; height: 90px;
+        }
+        .cute-logo {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, var(--th-pinkSoft), var(--th-lilacMid));
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Mali', cursive; font-weight: bold; font-size: 1.25rem; color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border: 4px solid white;
+            position: relative;
+            z-index: 2;
+            animation: floatSmooth 3s ease-in-out infinite;
+        }
+        .logo-pulse {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 80px; height: 80px;
+            background: var(--th-lilacMid);
+            border-radius: 50%;
+            z-index: 1;
+            animation: pulseRipple 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes floatSmooth {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulseRipple {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+        }
+
+        .preloader-title {
+            font-family: 'Mali', cursive; font-weight: bold; font-size: 2.25rem;
+            color: var(--th-lilacDark); letter-spacing: 1px; margin-bottom: 8px;
+            text-shadow: 2px 2px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white, 0 8px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Pulsing Text */
+        .welcome-text {
+            animation: textFade 2s ease-in-out infinite;
+        }
+        @keyframes textFade {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 180px; height: 8px; background: rgba(255,255,255,0.6);
+            border-radius: 10px; padding: 2px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            margin-top: 10px;
+        }
+        .progress-fill {
+            height: 100%; border-radius: 10px;
+            background: linear-gradient(90deg, var(--th-pinkSoft), var(--th-lilacMid), var(--th-mintMid));
+            background-size: 200% 100%;
+            width: 0%;
+            animation: fillUp 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards, gradientMove 2s linear infinite;
+        }
+        @keyframes fillUp { 0% { width: 0%; } 40% { width: 50%; } 80% { width: 85%; } 100% { width: 100%; } }
+        @keyframes gradientMove { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+        /* -------------------------------------
+2. MAIN PHONE FRAME & LAYOUT
+           ------------------------------------- */
+        .phone-frame {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            max-height: 100vh;
+            max-height: 100dvh;
+            background-color: var(--th-phoneBg);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        @media (min-width: 640px) {
+            .phone-frame {
+                width: 414px;
+                height: 850px;
+                min-height: 850px;
+                max-height: 850px;
+                flex-shrink: 0;
+                border-radius: 45px;
+                border: 12px solid #ffffff; 
+                box-shadow: 0 25px 50px -12px rgba(79, 55, 139, 0.25);
+                margin: 20px 0;
+                overflow: hidden; 
+                -webkit-mask-image: -webkit-radial-gradient(white, black);
+            }
+            .phone-notch {
+                position: absolute;
+                top: 0; left: 50%; transform: translateX(-50%);
+                width: 140px; height: 32px; background-color: #ffffff;
+                border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+                z-index: 50;
+            }
+        }
+
+        /* -------------------------------------
+3. BANNER (Fixed Background Style)
+           ------------------------------------- */
+        .banner-layer {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 380px; 
+            z-index: 0;
+            pointer-events: none;
+        }
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+        .banner-fade {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--th-phoneBg) 85%, var(--th-phoneBg) 100%);
+        }
+
+        /* -------------------------------------
+4. MARQUEE DESIGN (Cute Pill Style)
+           ------------------------------------- */
+        .marquee-pill-wrapper {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 99px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            height: 36px;
+            margin: 0 16px;
+            border: 2px solid white;
+        }
+        .marquee-icon-box {
+            background-color: var(--th-lilac); 
+            height: 100%;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .marquee-icon-box i {
+            color: var(--th-lilacDark); 
+            font-size: 13px;
+        }
+        .marquee-text-container {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .marquee-content { 
+            display: inline-block; 
+            animation: marquee 12s linear infinite; 
+            padding-left: 100%; 
+        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* -------------------------------------
+5. CONTENT & SCROLL AREA
+           ------------------------------------- */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            height: 100%;
+            padding-top: 50px; 
+            overflow: hidden; 
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .chat-scroll-area {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            padding: 0 14px;
+            padding-bottom: 120px; /* Space for buttons */
+        }
+
+        /* -------------------------------------
+6. CHAT BUBBLES (Real Chat Row with Profile Picture)
+           ------------------------------------- */
+        .chat-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .chat-row.row-right {
+            flex-direction: row-reverse;
+        }
+        .chat-row.animate-chat {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+        }
+
+        .chat-avatar-wrap {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 9999px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--th-lilacMid), var(--th-pinkSoft));
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+        }
+        .chat-row.row-right .chat-avatar-wrap {
+            background: linear-gradient(135deg, var(--th-mintMid), var(--th-mint));
+        }
+        .chat-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1.5px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chat-avatar-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 11px;
+            height: 11px;
+            border-radius: 9999px;
+            background: #7CE5B5;
+            border: 2px solid #ffffff;
+        }
+
+        .review-bubble {
+            background: #ffffff;
+            padding: 13px 15px;
+            max-width: calc(100% - 54px);
+            flex: 1;
+            position: relative;
+        }
+
+        .bubble-left {
+            border-radius: 22px 22px 22px 6px;
+            border: 1px solid var(--th-lilac);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+        .bubble-right {
+            border-radius: 22px 22px 6px 22px;
+            border: 1px solid var(--th-mintMid);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Typing indicator row */
+        .typing-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .typing-row.right {
+            flex-direction: row-reverse;
+        }
+        .typing-row.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-bubble {
+            background: #ffffff;
+            padding: 13px 18px;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .typing-bubble.left { border-radius: 22px 22px 22px 6px; border: 1px solid var(--th-lilac); }
+        .typing-bubble.right { border-radius: 22px 22px 6px 22px; border: 1px solid var(--th-mintMid); }
+        
+        .typing-indicator { display: flex; gap: 5px; align-items: center; }
+        .typing-indicator span {
+            display: block; width: 7px; height: 7px; background-color: var(--th-mintMid); border-radius: 50%; 
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; background-color: var(--th-lilacMid); }
+        .typing-indicator span:nth-child(3) { background-color: var(--th-pinkSoft); }
+        @keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
+
+        /* -------------------------------------
+6.5 CUTE MUSIC PLAYER WIDGET
+           ------------------------------------- */
+        .music-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid #ffffff;
+            border-radius: 9999px;
+            padding: 3px 10px 3px 4px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            transition: all 0.25s ease;
+        }
+        .music-disc {
+            width: 24px;
+            height: 24px;
+            border-radius: 9999px;
+            background: conic-gradient(from 0deg, var(--th-pinkSoft), var(--th-lilacMid), var(--th-mintMid), var(--th-pinkSoft));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            flex-shrink: 0;
+        }
+        .music-disc-center {
+            width: 9px;
+            height: 9px;
+            border-radius: 9999px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6px;
+            color: var(--th-lilacDark);
+        }
+        .music-disc.spinning {
+            animation: spinDisc 3.8s linear infinite;
+        }
+        @keyframes spinDisc {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Cute Equalizer Bars */
+        .eq-bars {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 11px;
+        }
+        .eq-bars span {
+            width: 2.5px;
+            border-radius: 4px;
+            background: var(--th-lilacDark);
+            height: 3px;
+            transition: height 0.2s ease;
+        }
+        .eq-bars.playing span:nth-child(1) { animation: eqBounce 0.7s ease-in-out infinite alternate; }
+        .eq-bars.playing span:nth-child(2) { animation: eqBounce 0.55s ease-in-out 0.15s infinite alternate; background: var(--th-mintMid); }
+        .eq-bars.playing span:nth-child(3) { animation: eqBounce 0.8s ease-in-out 0.3s infinite alternate; }
+        @keyframes eqBounce {
+            0% { height: 3px; }
+            100% { height: 11px; }
+        }
+
+        /* Floating Music Notes */
+        .music-note-particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 11px;
+            color: var(--th-lilacDark);
+            opacity: 0;
+            z-index: 35;
+            animation: floatNoteUp 1.8s ease-out forwards;
+        }
+        @keyframes floatNoteUp {
+            0% { transform: translate(0, 0) scale(0.7) rotate(-10deg); opacity: 0; }
+            20% { opacity: 0.95; }
+            100% { transform: translate(var(--nx, 12px), -34px) scale(1.15) rotate(14deg); opacity: 0; }
+        }
+
+        /* Music Popover Card */
+        .music-popover {
+            position: absolute;
+            top: 34px;
+            left: 0;
+            width: 225px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            border: 2px solid #ffffff;
+            border-radius: 22px;
+            padding: 12px;
+            box-shadow: 0 14px 30px rgba(79, 55, 139, 0.14);
+            z-index: 60;
+            opacity: 0;
+            transform: translateY(-6px) scale(0.95);
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .music-popover.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        /* -------------------------------------
+7. STAR ANIMATIONS (ลูกเล่นระดับดาว)
+           ------------------------------------- */
+        /* เอฟเฟกต์ตอนกดดาวในฟอร์มรีวิว */
+        @keyframes starPop {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.4) rotate(-15deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+        .star-anim-active { 
+            animation: starPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+
+        /* เอฟเฟกต์ดาววิบวับในข้อความรีวิว */
+        @keyframes starTwinkle {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(255, 210, 125, 0)); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 3px rgba(255, 210, 125, 0.8)); }
+        }
+        .chat-star { 
+            display: inline-block; 
+            animation: starTwinkle 2.5s infinite ease-in-out; 
+        }
+
+        /* -------------------------------------
+8. BOTTOM BUTTONS (Transparent Background)
+           ------------------------------------- */
+        .bottom-action-area {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 20px 20px 30px 20px;
+            z-index: 30;
+            pointer-events: none; 
+            /* ไล่สีโปร่งใสแบบฟุ้งๆ เพื่อไม่ให้ทึบ */
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.95) 100%);
+        }
+        .bottom-action-inner {
+            pointer-events: auto; 
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Floating Animation for bottom buttons */
+        @keyframes floatCute {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .btn-float { animation: floatCute 3.5s ease-in-out infinite; }
+        .btn-float:nth-child(2) { animation-delay: 1.75s; }
+        
+        .btn-press { transition: transform 0.1s; }
+        .btn-press:active { transform: scale(0.92); }
+
+        /* -------------------------------------
+9. MODALS & POPUPS
+           ------------------------------------- */
+        .modal-overlay {
+            position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); z-index: 100; 
+            display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.9) translateY(20px); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 85vh; overflow-y: auto; }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        
+        /* Slide Up Modal */
+        .slide-modal {
+            position: absolute; inset: 0; background: var(--th-phoneBg); z-index: 90; transform: translateY(100%); 
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; flex-direction: column;
+            border-top-left-radius: 40px; border-top-right-radius: 40px; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); top: auto; height: 85%;
+        }
+        .slide-modal.active { transform: translateY(0); }
+        .slide-modal-bg-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 89; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .slide-modal-bg-overlay.active { opacity: 1; pointer-events: auto; }
+
+        /* CONTACT MODAL (OVERFLOW VISIBLE) */
+        #contact-modal .modal-content {
+            overflow: visible !important; 
+        }
+
+        /* 1:1 Story Container (Frosted Glass Style) */
+        .cute-story-container {
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(25px);
+            border: 4px solid rgba(255,255,255,0.9); border-radius: 35px;
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            width: 100%; aspect-ratio: 1 / 1; 
+            margin: auto; position: relative;
+        }
+        .story-progress-bar { height: 3px; background: rgba(255,255,255,0.4); border-radius: 4px; overflow: hidden; flex: 1; }
+        .story-progress-fill { height: 100%; background: #ffffff; width: 0%; transform-origin: left; }
+        .story-progress-fill.active { animation: storyProgress 4s linear forwards; }
+        .story-progress-fill.completed { width: 100%; }
+        @keyframes storyProgress { from { width: 0%; } to { width: 100%; } }
+
+        /* Contact Glow Effects */
+        .glow-bg {
+            position: absolute; inset: -4px; border-radius: 99px; filter: blur(12px); opacity: 0.4; z-index: -1; transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .contact-link-btn:hover .glow-bg { opacity: 0.7; transform: scale(1.02); }
+        
+        .contact-link-btn {
+            display: flex; align-items: center; padding: 14px 20px;
+            border-radius: 99px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 2px solid rgba(255,255,255,0.8);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        /* Cute Toast Notification (Replaces native alert) */
+        .cute-toast {
+            position: absolute;
+            top: 56px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-16px);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--th-lilac);
+            color: var(--th-lilacDark);
+            padding: 9px 18px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(79, 55, 139, 0.14);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+            max-width: 88%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cute-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <!-- Floating Logo with Pulse Ripple -->
+            <div class="cute-logo-wrapper">
+                <div class="logo-pulse"></div>
+                <div class="cute-logo"><img src="https://i.postimg.cc/SNSHFLnk/IMG-7265.png" alt="Norivelle" style="width:100%;height:100%;object-fit:contain;border-radius:50%" onerror="this.src='https://placehold.co/100x100/FFD8E4/8B6BB1?text=NV'"></div>
+            </div>
+            
+            <h1 class="preloader-title">Norivelle</h1>
+            
+            <div class="bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm mb-6 border border-white welcome-text">
+                <span class="font-sans text-[10px] font-bold text-gray-500">จุดเช็คเครดิต ยินดีต้อนรับ ✨</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN PHONE FRAME -->
+    <div class="phone-frame">
+        <div class="phone-notch hidden sm:block"></div>
+
+        <!-- Cute Toast Container -->
+        <div id="cute-toast" class="cute-toast font-sans"></div>
+        
+        <!-- LAYER 1: BANNER (Fixed background, clipped by phone-frame border) -->
+        <div class="banner-layer">
+            <img id="app-banner" src="https://i.postimg.cc/3wvcCncg/mi-m-ch-x-37-20261013153716.png" alt="Banner" class="banner-img" onerror="this.src='https://placehold.co/828x828/FBE0EE/8B6BB1?text=Norivelle'">
+            <div class="banner-fade"></div>
+        </div>
+        
+        <!-- LAYER 2: CONTENT (Scrolls internally) -->
+        <div class="content-layer">
+            
+            <!-- Marquee (Pill Style) -->
+            <div class="mb-4 z-20">
+                <div class="marquee-pill-wrapper">
+                    <div class="marquee-icon-box" id="marquee-icon-bg">
+                        <i class="fa-solid fa-bullhorn" id="marquee-icon-color"></i>
+                    </div>
+                    <div class="marquee-text-container">
+                        <div class="marquee-content font-sans text-xs font-medium text-gray-600" id="marquee-display">
+                            ยินดีต้อนรับสู่ร้านของเราค่ะ 💖 ขอบคุณทุกรีวิวที่น่ารักนะคะ 🍃
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Small Capsule Menus -->
+            <div class="flex justify-center gap-3 px-6 mb-4 mt-28 relative z-20">
+                <button onclick="openModal('contact-modal')" class="flex-1 bg-white/95 backdrop-blur-sm py-2 px-4 rounded-full text-theme-textMain font-sans text-[11px] font-bold shadow-sm border border-white transition-all btn-press flex items-center justify-center gap-2 hover:bg-gray-50 text-gray-700">
+                    <i class="fa-solid fa-address-book text-pink-400"></i> ติดต่อเรา
+                </button>
+                <button onclick="openHighlightGallery()" class="flex-1 bg-white/95 backdrop-blur-sm py-2 px-4 rounded-full text-theme-textMain font-sans text-[11px] font-bold shadow-sm border border-white transition-all btn-press flex items-center justify-center gap-2 hover:bg-gray-50 text-gray-700">
+                    <i class="fa-solid fa-star text-theme-mintMid" style="color: var(--th-mintMid)"></i> ไฮไลท์ร้าน
+                </button>
+
+                <!-- Cute Music Player Widget (Symmetric Left of Admin Settings) -->
+                <div class="absolute -bottom-10 left-4 z-30" id="music-widget-wrap">
+                    <div class="music-pill">
+                        <button onclick="toggleMusicPlay()" id="music-play-btn" class="flex items-center gap-1.5 btn-press focus:outline-none" title="เปิด/ปิดเพลงน่ารักๆ">
+                            <div class="music-disc" id="music-disc">
+                                <div class="music-disc-center">
+                                    <i class="fa-solid fa-music" id="music-disc-icon"></i>
+                                </div>
+                            </div>
+                            <div class="eq-bars" id="music-eq">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span id="music-status-label" class="font-sans text-[10px] font-bold max-w-[82px] truncate" style="color: var(--th-lilacDark)">เปิดเพลง 🎵</span>
+                        </button>
+                        <button onclick="toggleMusicMenu(event)" class="w-5 h-5 rounded-full flex items-center justify-center text-[9px] hover:bg-gray-100 transition-colors btn-press" style="color: var(--th-lilacDark)" title="เลือกเพลง & ระดับเสียง">
+                            <i class="fa-solid fa-sliders"></i>
+                        </button>
+                    </div>
+
+                    <!-- Expandable Cute Music Menu Popover -->
+                    <div id="music-popover" class="music-popover font-sans">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-cute text-xs font-bold flex items-center gap-1.5" style="color: var(--th-lilacDark)">
+                                <i class="fa-solid fa-headphones"></i> เพลงน่ารักๆ
+                            </span>
+                            <button onclick="closeMusicMenu()" class="text-gray-400 hover:text-gray-600 text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+
+                        <!-- Track Selector List -->
+                        <div class="space-y-1.5 mb-3" id="music-track-list">
+                            <!-- Rendered by JS -->
+                        </div>
+
+                        <!-- Volume Slider -->
+                        <div class="bg-gray-50/90 rounded-xl px-2.5 py-2 border border-gray-100 space-y-2">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-volume-low text-[10px]" style="color: var(--th-lilacDark)"></i>
+                                <input type="range" id="music-volume" min="-30" max="-6" value="-14" oninput="updateMusicVolume(this.value)" class="w-full h-1.5 rounded-lg cursor-pointer accent-purple-400">
+                            </div>
+                            <label class="flex items-center justify-between cursor-pointer text-[10px] text-gray-600">
+                                <span>เสียงป๊อปตอนแชทเด้ง ✨</span>
+                                <input type="checkbox" id="chat-sfx-toggle" checked onchange="toggleChatSfx(this.checked)" class="accent-pink-400 rounded cursor-pointer">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Settings -->
+                <button onclick="openAdmin()" class="absolute -bottom-10 right-4 w-7 h-7 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center transition-colors z-20 btn-press border border-white" style="color: var(--th-lilacDark)">
+                    <i class="fa-solid fa-gear text-[10px]"></i>
+                </button>
+            </div>
+            
+            <!-- Chat Scroll Area -->
+            <div class="chat-scroll-area hide-scrollbar" id="main-scroll-area">
+                
+                <div class="flex justify-center mb-6 mt-2">
+                    <div class="bg-white/90 backdrop-blur-md px-5 py-2 rounded-full shadow-sm border border-white">
+                        <span class="font-sans text-[10px] font-bold" id="review-count-display" style="color: var(--th-lilacDark)">รีวิวทั้งหมด 0 รายการ 💖</span>
+                    </div>
+                </div>
+
+                <div id="chat-container" class="flex flex-col relative justify-end min-h-[50%]">
+                    <!-- Chat bubbles injected here -->
+                    <div id="chat-spacer" class="h-4 shrink-0 mt-auto"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAYER 3: BOTTOM BUTTONS (Transparent Overlay) -->
+        <div class="bottom-action-area">
+            <div class="bottom-action-inner">
+                <!-- Minus Button (Capsule, Floating) -->
+                <button onclick="openModal('minus-modal')" class="flex-1 flex flex-col items-center group btn-press btn-float">
+                    <div class="w-full py-3.5 px-4 rounded-full bg-white shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center justify-center gap-2 border-[3px] border-white transition-all" style="color: var(--th-lilacDark)">
+                        <i class="fa-solid fa-heart-crack text-lg" style="color: var(--th-lilacMid)"></i>
+                        <span class="font-cute font-bold text-sm">Minus one</span>
+                    </div>
+                    <p class="font-sans text-[8px] text-gray-500 text-center mt-2 font-medium bg-white/70 px-3 py-1 rounded-full backdrop-blur-sm">แจ้งเรื่องให้ร้านปรับปรุง ♡</p>
+                </button>
+
+                <!-- Plus Button (Capsule, Floating) -->
+                <button onclick="openModal('plus-modal')" class="flex-1 flex flex-col items-center group btn-press btn-float">
+                    <div class="w-full py-3.5 px-4 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.12)] flex items-center justify-center gap-2 text-gray-800 border-[3px] border-white transition-all" style="background: linear-gradient(135deg, var(--th-mint), var(--th-mintMid))">
+                        <i class="fa-solid fa-heart text-white text-lg drop-shadow-sm"></i>
+                        <span class="font-cute font-bold text-sm text-gray-800">Plus one</span>
+                    </div>
+                    <p class="font-sans text-[8px] text-gray-500 text-center mt-2 font-medium bg-white/70 px-3 py-1 rounded-full backdrop-blur-sm">กดเพื่อให้คะแนนร้าน ♡</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- MODALS AREA -->
+        <!-- ============================================== -->
+        
+        <!-- 1. Contact Popup (OVERFLOW VISIBLE) -->
+        <div id="contact-modal" class="modal-overlay">
+            <div class="modal-content bg-white w-[85%] max-w-[320px] rounded-[35px] p-6 shadow-2xl relative border-[4px] border-white pt-10" style="background-image: radial-gradient(circle at top right, var(--th-phoneBg) 0%, #ffffff 100%);">
+                
+                <!-- Floating Icon overlapping top border perfectly -->
+                <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-[70px] h-[70px] bg-white rounded-full p-1.5 shadow-[0_10px_20px_rgba(79,55,139,0.15)] border-4 border-white z-20">
+                    <div class="w-full h-full rounded-full flex items-center justify-center text-2xl text-white" style="background: var(--th-lilacDark);">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+                </div>
+
+                <button onclick="closeModal('contact-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-red-400 w-8 h-8 rounded-full flex items-center justify-center transition-colors btn-press bg-gray-50 z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                
+                <div class="text-center mb-6 mt-3 relative z-10">
+                    <h3 class="font-cute font-bold text-xl mb-1" style="color: var(--th-lilacDark)">ช่องทางการติดต่อ</h3>
+                    <p class="text-[10px] text-theme-textMuted font-sans">สอบถามเพิ่มเติมได้ทุกช่องทางเลยนะคะ ✨</p>
+                </div>
+                
+                <div class="font-sans space-y-3 relative z-10" id="contact-links-container">
+                    <!-- Links injected here by JS with Blur Glow Effects -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Highlight Gallery (Slide Up Modal) -->
+        <div id="highlight-gallery-bg" class="slide-modal-bg-overlay" onclick="closeHighlightGallery()"></div>
+        <div id="highlight-gallery-modal" class="slide-modal">
+            <div class="pt-6 pb-3 px-6 rounded-t-[40px] flex items-center justify-between z-10 relative border-b border-theme-lilac/50" style="background-color: var(--th-phoneBg)">
+                <h2 class="font-cute font-bold text-lg flex items-center gap-2" style="color: var(--th-lilacDark)">
+                    คลังไฮไลท์ <i class="fa-solid fa-star text-theme-star text-sm"></i>
+                </h2>
+                <button onclick="closeHighlightGallery()" class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-theme-textMuted btn-press shadow-sm">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto px-6 py-6 flex flex-wrap gap-x-4 gap-y-6 justify-start content-start" id="gallery-container" style="background-color: var(--th-phoneBg)">
+                <!-- Highlights injected here -->
+            </div>
+        </div>
+
+        <!-- 3. Story Viewer (1:1 Ratio Frosted Glass) -->
+        <div id="story-modal" class="modal-overlay z-[110]" style="background: rgba(255,255,255,0.4); backdrop-filter: blur(15px);">
+            <div class="w-full h-full max-w-[414px] flex flex-col justify-center relative p-6" onclick="nextStory()">
+                
+                <!-- Story Header -->
+                <div class="flex justify-between items-center mb-4 z-10 relative pointer-events-none">
+                    <div class="flex items-center gap-2 bg-white/90 backdrop-blur-md py-1.5 px-3 rounded-full shadow-sm">
+                        <div class="w-7 h-7 rounded-full p-[2px]" style="background: linear-gradient(to top right, var(--th-mintMid), var(--th-lilac))">
+                            <img src="https://i.postimg.cc/SNSHFLnk/IMG-7265.png" class="w-full h-full bg-white rounded-full object-cover" onerror="this.src='https://placehold.co/60x60/FFD8E4/8B6BB1?text=NV'">
+                        </div>
+                        <span class="font-sans font-bold text-xs" style="color: var(--th-lilacDark)">Norivelle</span>
+                    </div>
+                    <button onclick="closeStory(event)" class="pointer-events-auto text-gray-500 p-2 bg-white/90 rounded-full backdrop-blur-sm w-9 h-9 flex items-center justify-center shadow-sm btn-press">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- The 1:1 Square Container -->
+                <div class="cute-story-container">
+                    <div class="w-full flex gap-1.5 p-4 absolute top-0 z-20" id="story-progress-container"></div>
+                    <img id="story-img" src="" class="absolute inset-0 w-full h-full object-cover">
+                    <!-- Title badge at bottom -->
+                    <div class="absolute bottom-6 inset-x-0 flex justify-center z-10 pointer-events-none">
+                        <div class="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full shadow-sm">
+                            <h2 id="story-text-title" class="font-cute text-sm font-bold" style="color: var(--th-lilacDark)">Title</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 font-sans text-xs mx-auto w-fit bg-white/60 px-4 py-1.5 rounded-full">แตะเพื่อดูรูปถัดไป ✨</div>
+            </div>
+        </div>
+
+        <!-- 3.5 Image Preview Lightbox (For Admin Complaint Evidence) -->
+        <div id="photo-preview-modal" class="modal-overlay z-[115]" onclick="closeModal('photo-preview-modal')">
+            <div class="modal-content bg-white/95 backdrop-blur-md w-[88%] max-w-[350px] rounded-[30px] p-3.5 shadow-2xl relative border-[3px] border-white" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between mb-2.5 px-1">
+                    <span id="photo-preview-caption" class="font-cute font-bold text-xs truncate" style="color: var(--th-lilacDark)">รูปหลักฐานแจ้งปัญหา</span>
+                    <button onclick="closeModal('photo-preview-modal')" class="w-7 h-7 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center btn-press">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+                <div class="overflow-hidden rounded-2xl border-2" style="border-color: var(--th-bg)">
+                    <img id="photo-preview-img" src="" alt="Preview" class="w-full max-h-[60vh] object-contain bg-white">
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Plus One Form -->
+        <div id="plus-modal" class="modal-overlay">
+            <div class="modal-content bg-white w-[90%] max-w-[340px] rounded-[35px] p-6 shadow-2xl relative border-[3px]" style="border-color: var(--th-mintMid)">
+                <button onclick="closeModal('plus-modal')" class="absolute top-4 right-4 text-theme-textMuted bg-gray-50 w-8 h-8 rounded-full flex items-center justify-center transition-colors btn-press border border-white"><i class="fa-solid fa-xmark"></i></button>
+                <div class="text-center mb-4 mt-2">
+                    <div class="inline-block px-3 py-1 text-gray-700 rounded-full font-cute text-[9px] font-bold mb-2 shadow-sm border border-white" style="background-color: var(--th-mint)">หน้าร้าน</div>
+                    <h3 class="font-cute font-bold text-xl text-gray-800 mb-1">รีวิวให้กำลังใจ 💖</h3>
+                </div>
+                <div class="space-y-4 font-sans text-sm">
+                    <div>
+                        <label class="block text-[11px] font-bold mb-1" style="color: var(--th-lilacDark)">ชื่อผู้รีวิว <span class="text-red-400">*</span></label>
+                        <input type="text" id="plus-name" placeholder="ระบุชื่อของคุณ" class="w-full border rounded-2xl p-3 focus:outline-none transition-all text-xs" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold mb-1" style="color: var(--th-lilacDark)">ระดับความประทับใจ <span class="text-red-400">*</span></label>
+                        <div class="flex justify-center gap-2 text-2xl text-gray-200 py-2 rounded-2xl border" id="plus-stars" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                            <i class="fa-solid fa-star cursor-pointer hover:scale-125 transition-transform" onclick="setStar(1)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:scale-125 transition-transform" onclick="setStar(2)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:scale-125 transition-transform" onclick="setStar(3)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:scale-125 transition-transform" onclick="setStar(4)"></i>
+                            <i class="fa-solid fa-star cursor-pointer hover:scale-125 transition-transform text-theme-star" onclick="setStar(5)"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold mb-1" style="color: var(--th-lilacDark)">ความรู้สึกของคุณ <span class="text-red-400">*</span></label>
+                        <textarea id="plus-text" placeholder="สินค้าถูกใจไหม บริการเป็นอย่างไรบ้าง..." class="w-full border rounded-2xl p-3 focus:outline-none transition-all resize-none h-16 text-xs" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)"></textarea>
+                    </div>
+                    <p id="plus-error" class="text-[10px] text-red-500 font-bold hidden text-center bg-red-50 p-1.5 rounded-lg border border-red-100">กรุณากรอกชื่อและข้อความรีวิวให้ครบถ้วนค่ะ</p>
+                    <button onclick="submitPlusReview()" class="w-full py-3 text-gray-800 font-cute font-bold text-sm rounded-2xl shadow-sm btn-press flex items-center justify-center gap-2 border border-white" style="background: linear-gradient(to right, var(--th-mintMid), var(--th-mint))">
+                        โพสต์รีวิว
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Minus One Form -->
+        <div id="minus-modal" class="modal-overlay">
+            <div class="modal-content bg-white w-[90%] max-w-[340px] rounded-[35px] p-6 shadow-2xl relative border-[3px]" style="border-color: var(--th-lilacDark)">
+                <button onclick="closeModal('minus-modal')" class="absolute top-4 right-4 text-theme-textMuted hover:text-red-500 bg-gray-50 w-8 h-8 rounded-full flex items-center justify-center transition-colors btn-press border border-white"><i class="fa-solid fa-xmark"></i></button>
+                <div class="text-center mb-4 mt-2">
+                    <div class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full font-cute text-[9px] font-bold mb-2 shadow-sm border border-white">แจ้งปัญหา</div>
+                    <h3 class="font-cute font-bold text-xl mb-1" style="color: var(--th-lilacDark)">แจ้งเรื่องให้ปรับปรุง 🥺</h3>
+                    <p class="text-[10px] text-theme-textMuted font-sans leading-tight">ข้อมูลนี้จะส่งตรงถึงแอดมินเท่านั้น</p>
+                </div>
+                <div class="space-y-3 font-sans text-sm">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 mb-1">Facebook <span class="text-red-500">*</span></label>
+                            <input type="text" id="min-fb" class="w-full border rounded-xl p-2.5 text-xs focus:outline-none" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 mb-1">Instagram <span class="text-red-500">*</span></label>
+                            <input type="text" id="min-ig" class="w-full border rounded-xl p-2.5 text-xs focus:outline-none" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 mb-1">Line ID <span class="text-red-500">*</span></label>
+                            <input type="text" id="min-line" class="w-full border rounded-xl p-2.5 text-xs focus:outline-none" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 mb-1">X/Twitter <span class="text-red-500">*</span></label>
+                            <input type="text" id="min-x" class="w-full border rounded-xl p-2.5 text-xs focus:outline-none" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-600 mb-1">รายละเอียดปัญหา <span class="text-red-500">*</span></label>
+                        <textarea id="min-text" class="w-full border rounded-xl p-3 resize-none h-16 text-xs focus:outline-none" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-600 mb-1">แนบรูปลิงก์หลักฐาน (ไม่บังคับ)</label>
+                        <input type="text" id="min-img" placeholder="วางลิงก์รูปภาพประกอบปัญหา (ถ้ามี)" class="w-full border border-dashed rounded-xl p-2.5 text-xs focus:outline-none" style="background-color: var(--th-phoneBg); border-color: var(--th-lilac)">
+                    </div>
+                    <p id="minus-error" class="text-[10px] text-red-500 font-bold hidden text-center bg-red-50 p-1.5 rounded-lg border border-red-100">กรุณากรอกข้อมูลให้ครบทุกช่องค่ะ</p>
+                    <button onclick="submitMinusReview()" class="w-full py-3 text-white font-cute font-bold text-sm rounded-xl shadow-md btn-press border" style="background-color: var(--th-lilacDark); border-color: var(--th-lilacDark)">
+                        ส่งให้แอดมินตรวจสอบ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5.5 Inline Confirm Modal (Replaces native confirm) -->
+        <div id="confirm-modal" class="modal-overlay z-[130]">
+            <div class="modal-content bg-white w-[82%] max-w-[290px] rounded-[28px] p-5 shadow-2xl border-[3px] text-center font-sans" style="border-color: var(--th-lilac)">
+                <p id="confirm-modal-text" class="text-xs font-bold text-gray-700 mb-4 leading-relaxed"></p>
+                <div class="flex gap-2">
+                    <button onclick="closeConfirmModal(false)" class="flex-1 py-2.5 rounded-xl text-xs font-bold text-gray-500 bg-gray-100 btn-press">ยกเลิก</button>
+                    <button onclick="closeConfirmModal(true)" class="flex-1 py-2.5 rounded-xl text-xs font-bold text-white btn-press" style="background-color: var(--th-lilacDark)">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Admin Dashboard -->
+        <div id="admin-modal" class="slide-modal" style="height: 90%; top: auto; background-color: #f9fafb;">
+            <div class="pt-6 pb-4 px-6 bg-white rounded-t-[40px] shadow-sm flex items-center justify-between z-20 relative border-b border-gray-100">
+                <h2 class="font-cute font-bold text-xl flex items-center gap-2" style="color: var(--th-lilacDark)">
+                    <i class="fa-solid fa-lock" style="color: var(--th-mintMid)"></i> ระบบหลังบ้าน
+                </h2>
+                <button onclick="closeAdmin()" class="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 btn-press border bg-gray-50"><i class="fa-solid fa-chevron-down"></i></button>
+            </div>
+            <div class="flex border-b border-gray-200 bg-white font-sans text-xs z-10 relative px-2">
+                <button onclick="switchAdminTab('reviews')" id="tab-reviews" class="flex-1 py-3 font-bold border-b-2 transition-colors" style="color: var(--th-lilacDark); border-color: var(--th-lilacDark)">รีวิว & ปัญหา</button>
+                <button onclick="switchAdminTab('highlights')" id="tab-highlights" class="flex-1 py-3 text-gray-400 border-b-2 border-transparent transition-colors">ไฮไลท์</button>
+                <button onclick="switchAdminTab('settings')" id="tab-settings" class="flex-1 py-3 text-gray-400 border-b-2 border-transparent transition-colors">ตั้งค่าร้าน</button>
+            </div>
+            <div class="flex-1 overflow-y-auto font-sans relative p-4 space-y-4">
+                
+                <!-- TAB: REVIEWS -->
+                <div id="admin-reviews" class="space-y-4">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="text-sm font-bold mb-3" style="color: var(--th-lilacDark)"><i class="fa-solid fa-heart-crack text-xs"></i> ปัญหา (-1)</h3>
+                        <div id="admin-complaints-list" class="space-y-3"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="text-sm font-bold mb-3" style="color: var(--th-mintMid)"><i class="fa-solid fa-heart text-xs"></i> รีวิวหน้าร้าน (+1)</h3>
+                        <div id="admin-public-reviews" class="space-y-3"></div>
+                    </div>
+                </div>
+
+                <!-- TAB: HIGHLIGHTS -->
+                <div id="admin-highlights" class="hidden space-y-4">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 id="hl-form-title" class="text-sm font-bold mb-3" style="color: var(--th-lilacDark)">เพิ่ม/แก้ไข ไฮไลท์</h3>
+                        <input type="hidden" id="edit-hl-id" value="">
+                        <input type="text" id="new-hl-title" placeholder="ชื่อไฮไลท์" class="w-full border rounded-xl p-3 text-xs mb-3 focus:outline-none bg-gray-50 border-gray-200">
+                        <textarea id="new-hl-imgs" placeholder="ลิงก์รูป (1 บรรทัด = 1 รูป)" class="w-full border rounded-xl p-3 text-xs mb-3 h-20 resize-none focus:outline-none bg-gray-50 border-gray-200"></textarea>
+                        <div class="flex gap-2">
+                            <button onclick="saveHighlight()" id="btn-save-hl" class="flex-1 py-2.5 rounded-xl text-xs font-bold text-gray-800" style="background-color: var(--th-mintMid)">บันทึก</button>
+                            <button onclick="cancelEditHighlight()" id="btn-cancel-hl" class="hidden flex-1 bg-white py-2.5 rounded-xl text-xs font-bold text-gray-500 border border-gray-200">ยกเลิก</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-gray-700 mb-2 px-1">ไฮไลท์ปัจจุบัน</h3>
+                        <div id="admin-hl-list" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- TAB: SETTINGS -->
+                <div id="admin-settings" class="hidden space-y-4 pb-10">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        
+                        <!-- Theme Selection -->
+                        <h3 class="text-sm font-bold mb-1" style="color: var(--th-lilacDark)">เลือกโทนสีร้าน</h3>
+                        <p class="text-[9px] text-gray-400 mb-2">* เปลี่ยนสีแชท ปุ่ม และพื้นหลังอัตโนมัติ</p>
+                        <div class="flex gap-2 mb-4">
+                            <button onclick="changeTheme('default')" class="flex-1 py-2.5 rounded-xl text-[10px] font-bold border btn-press" style="background:#FDF0F5; border-color:#8B6BB1; color:#8B6BB1">ชมพู-ม่วง (ค่าเริ่มต้น)</button>
+                            <button onclick="changeTheme('pinkBlue')" class="flex-1 py-2.5 rounded-xl text-[10px] font-bold border btn-press" style="background:#FFF0F5; border-color:#D81B60; color:#D81B60">ชมพู-ฟ้า</button>
+                            <button onclick="changeTheme('peach')" class="flex-1 py-2.5 rounded-xl text-[10px] font-bold border btn-press" style="background:#FFF5E6; border-color:#D2691E; color:#D2691E">พีช-เหลือง</button>
+                        </div>
+
+                        <!-- Custom Colors -->
+                        <h3 class="text-sm font-bold mb-1 mt-4" style="color: var(--th-lilacDark)">ตั้งค่าสีเอง (Custom Colors)</h3>
+                        <div class="grid grid-cols-2 gap-3 mb-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[10px] text-gray-600 font-bold">สีพื้นนอกเว็บ</label>
+                                <input type="color" id="c-bg" class="w-full h-8 rounded cursor-pointer border border-gray-300">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[10px] text-gray-600 font-bold">สีพื้นมือถือ</label>
+                                <input type="color" id="c-phone" class="w-full h-8 rounded cursor-pointer border border-gray-300">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[10px] text-gray-600 font-bold">สีหลัก (ข้อความ/กรอบ)</label>
+                                <input type="color" id="c-main" class="w-full h-8 rounded cursor-pointer border border-gray-300">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[10px] text-gray-600 font-bold">สีรอง (ปุ่ม/ตกแต่ง)</label>
+                                <input type="color" id="c-sub" class="w-full h-8 rounded cursor-pointer border border-gray-300">
+                            </div>
+                        </div>
+
+                        <hr class="my-4 border-gray-100">
+
+                        <!-- Chat Profile Avatars (Max 6, Cycling) -->
+                        <h3 class="text-sm font-bold mb-1" style="color: var(--th-lilacDark)">รูปโปรไฟล์แชทรีวิว (สูงสุด 6 แบบ)</h3>
+                        <p class="text-[9px] text-gray-400 mb-2.5">* ใส่ลิงก์รูปภาพ (URL) หรือพิมพ์อิโมจิก็ได้ ระบบจะสลับวนใช้ตามช่องที่กรอก (ว่างทุกช่อง = ใช้การ์ตูนเริ่มต้น)</p>
+                        <div class="space-y-2 mb-4 bg-gray-50 p-3 rounded-xl border border-gray-100" id="admin-avatar-inputs"></div>
+
+                        <hr class="my-4 border-gray-100">
+                        
+                        <h3 class="text-sm font-bold mb-1" style="color: var(--th-lilacDark)">ข้อความวิ่งหน้าร้าน (Marquee)</h3>
+                        <input type="text" id="set-marquee" placeholder="พิมพ์ข้อความวิ่งที่นี่" class="w-full border rounded-xl p-3 text-xs mb-4 focus:outline-none bg-gray-50 border-gray-200">
+
+                        <h3 class="text-sm font-bold mb-1" style="color: var(--th-lilacDark)">รูปแบบแบนเนอร์ร้าน</h3>
+                        <p class="text-[9px] text-red-500 font-bold mb-2">* แนะนำให้ใช้รูปที่มีขนาดและสัดส่วน 828 x 828 px (1:1) เพื่อความสวยงามพอดีกับกรอบมากที่สุด</p>
+                        <input type="text" id="set-banner" placeholder="ลิงก์รูปแบนเนอร์ URL" class="w-full border rounded-xl p-3 text-xs mb-4 focus:outline-none bg-gray-50 border-gray-200">
+                        
+                        <h3 class="text-sm font-bold mb-3" style="color: var(--th-lilacDark)">ช่องทางการติดต่อ</h3>
+                        <div class="space-y-3">
+                            <input type="text" id="set-fb" placeholder="ลิงก์ Facebook" class="w-full border rounded-xl p-3 text-xs focus:outline-none bg-gray-50 border-gray-200">
+                            <input type="text" id="set-ig" placeholder="ลิงก์ Instagram" class="w-full border rounded-xl p-3 text-xs focus:outline-none bg-gray-50 border-gray-200">
+                            <input type="text" id="set-line" placeholder="ลิงก์ Line" class="w-full border rounded-xl p-3 text-xs focus:outline-none bg-gray-50 border-gray-200">
+                        </div>
+                        
+                        <button onclick="saveSettings()" class="w-full text-white py-3 rounded-xl text-sm font-bold mt-4 shadow-sm btn-press" style="background-color: var(--th-lilacDark)">บันทึกการตั้งค่า</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------------------------
+10. JAVASCRIPT LOGIC
+         ------------------------------------- -->
+    <script>
+        const STORAGE_KEY = 'pastelAppV9_complete'; 
+
+        const THEMES = {
+            default: { bg: '#FDF0F5', phoneBg: '#FFF7FC', main: '#8B6BB1', sub: '#EDB9D6' },
+            pinkBlue: { bg: '#FFF0F5', phoneBg: '#FFFAFA', main: '#D81B60', sub: '#80DEEA' },
+            peach: { bg: '#FFF5E6', phoneBg: '#FFFAF0', main: '#D2691E', sub: '#98FB98' }
+        };
+
+        const DEFAULT_DATA = {
+            theme: 'default',
+            customColors: { bg: '#FDF0F5', phoneBg: '#FFF7FC', main: '#8B6BB1', sub: '#EDB9D6' },
+            chatAvatars: ['', '', '', '', '', ''],
+            marqueeText: "ยินดีต้อนรับสู่ร้านของเราค่ะ 💖 ขอบคุณทุกรีวิวที่น่ารักนะคะ 🍃",
+            banner: "https://i.postimg.cc/3wvcCncg/mi-m-ch-x-37-20261013153716.png",
+            contacts: { fb: "https://facebook.com", ig: "https://instagram.com", line: "https://line.me" },
+            highlights: [
+                { id: 1, title: 'New Arrival', imgs: ['https://placehold.co/800x800/EADDFF/4F378B?text=New+Arrival+1', 'https://placehold.co/800x800/D1F0DE/4F378B?text=New+Arrival+2'] },
+                { id: 2, title: 'Best Seller', imgs: ['https://placehold.co/800x800/FFD8E4/4F378B?text=Best+Seller'] },
+                { id: 3, title: 'Sale 50%', imgs: ['https://placehold.co/800x800/FAF5FF/4F378B?text=Sale'] }
+            ],
+            reviews: [
+                { id: 1, name: 'แพรวา', text: 'งานน่ารักมากเลยค่ะ โทนสีถูกใจสุดๆ บริการดีเยี่ยม ไว้มาอุดหนุนอีกแน่นอนค่ะ 💖✨', stars: 5, img: null, time: '2 ชั่วโมงที่แล้ว', isRight: false },
+                { id: 2, name: 'มายด์', text: 'โอนง่าย ได้แต้มด้วย ชอบมากเลยค่ะ 🥰 แพ็คเกจก็คิวท์สุดๆ', stars: 5, img: null, time: '5 ชั่วโมงที่แล้ว', isRight: true },
+                { id: 3, name: 'คุณเค้ก', text: 'ได้ของไวมาก หอมกลิ่นกระดาษสุดๆ ค่ะ สั่งรอบที่ 3 แล้ว ไม่เคยผิดหวังเลย 🌷', stars: 4, img: null, time: '1 วันที่แล้ว', isRight: false }
+            ],
+            complaints: []
+        };
+
+        let appData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || DEFAULT_DATA;
+        if(!appData.customColors) appData.customColors = DEFAULT_DATA.customColors;
+        if (!Array.isArray(appData.chatAvatars) || appData.chatAvatars.length !== 6) {
+            appData.chatAvatars = Array.from({ length: 6 }, (_, i) => (Array.isArray(appData.chatAvatars) && appData.chatAvatars[i]) ? appData.chatAvatars[i] : '');
+        }
+        // Apply this shop's branding once while preserving reviews and other settings.
+        if (appData.brandingVersion !== 'norivelle-20261013') {
+            appData.theme = DEFAULT_DATA.theme;
+            appData.customColors = { ...DEFAULT_DATA.customColors };
+            appData.banner = DEFAULT_DATA.banner;
+            appData.brandingVersion = 'norivelle-20261013';
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        }
+
+        function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
+
+        /* -------------------------------------
+         * Cute Toast & Inline Confirm Helpers
+         * ------------------------------------- */
+        let toastTimer = null;
+        function showToast(msg) {
+            const toast = document.getElementById('cute-toast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2400);
+        }
+
+        let confirmCallback = null;
+        function showConfirmModal(message, onConfirm) {
+            document.getElementById('confirm-modal-text').textContent = message;
+            confirmCallback = onConfirm;
+            document.getElementById('confirm-modal').classList.add('active');
+        }
+        function closeConfirmModal(accepted) {
+            document.getElementById('confirm-modal').classList.remove('active');
+            if (accepted && typeof confirmCallback === 'function') {
+                confirmCallback();
+            }
+            confirmCallback = null;
+        }
+
+        function applyColors(bg, phoneBg, main, sub) {
+            document.documentElement.style.setProperty('--th-bg', bg);
+            document.documentElement.style.setProperty('--th-phoneBg', phoneBg);
+            document.documentElement.style.setProperty('--th-lilacDark', main);
+            document.documentElement.style.setProperty('--th-mintMid', sub);
+            
+            document.documentElement.style.setProperty('--th-lilac', main + '33'); 
+            document.documentElement.style.setProperty('--th-lilacMid', main + '80'); 
+            document.documentElement.style.setProperty('--th-mint', sub + '40'); 
+            document.documentElement.style.setProperty('--th-pinkSoft', '#FFD8E4'); 
+            
+            document.getElementById('marquee-icon-bg').style.backgroundColor = main + '33';
+            document.getElementById('marquee-icon-color').style.color = main;
+        }
+
+        function loadTheme() {
+            if(appData.theme === 'custom') {
+                const c = appData.customColors;
+                applyColors(c.bg, c.phoneBg, c.main, c.sub);
+            } else {
+                const t = THEMES[appData.theme] || THEMES['default'];
+                applyColors(t.bg, t.phoneBg, t.main, t.sub);
+            }
+        }
+
+        /* -------------------------------------
+         * Cute Inline SVG Chat Profile Avatars
+         * ------------------------------------- */
+        const CHAT_AVATARS = [
+            // 0: Pastel Bunny
+            `<svg viewBox="0 0 64 64" class="w-full h-full"><rect width="64" height="64" fill="#FFE6F0"/><ellipse cx="22" cy="18" rx="6" ry="14" fill="#FFF" stroke="#E8B4CB" stroke-width="2"/><ellipse cx="42" cy="18" rx="6" ry="14" fill="#FFF" stroke="#E8B4CB" stroke-width="2"/><ellipse cx="22" cy="19" rx="3" ry="9" fill="#FFC2DC"/><ellipse cx="42" cy="19" rx="3" ry="9" fill="#FFC2DC"/><circle cx="32" cy="40" r="18" fill="#FFF" stroke="#E8B4CB" stroke-width="2"/><circle cx="25" cy="38" r="2.6" fill="#5A4A66"/><circle cx="39" cy="38" r="2.6" fill="#5A4A66"/><ellipse cx="20" cy="43" rx="3.5" ry="2" fill="#FFB3D1" opacity="0.8"/><ellipse cx="44" cy="43" rx="3.5" ry="2" fill="#FFB3D1" opacity="0.8"/><path d="M29 43 Q32 46 35 43" fill="none" stroke="#8B6BB1" stroke-width="2" stroke-linecap="round"/></svg>`,
+            // 1: Pastel Kitty
+            `<svg viewBox="0 0 64 64" class="w-full h-full"><rect width="64" height="64" fill="#EFE7FF"/><polygon points="14,32 18,12 30,22" fill="#FFF" stroke="#C5B0E6" stroke-width="2" stroke-linejoin="round"/><polygon points="50,32 46,12 34,22" fill="#FFF" stroke="#C5B0E6" stroke-width="2" stroke-linejoin="round"/><polygon points="18,26 20,17 26,23" fill="#FFD1E8"/><polygon points="46,26 44,17 38,23" fill="#FFD1E8"/><circle cx="32" cy="38" r="18" fill="#FFF" stroke="#C5B0E6" stroke-width="2"/><circle cx="25" cy="37" r="2.5" fill="#5A4A66"/><circle cx="39" cy="37" r="2.5" fill="#5A4A66"/><ellipse cx="20" cy="42" rx="3.2" ry="1.8" fill="#FFB8D9"/><ellipse cx="44" cy="42" rx="3.2" ry="1.8" fill="#FFB8D9"/><path d="M29 42 Q32 45 35 42" fill="none" stroke="#8B6BB1" stroke-width="2" stroke-linecap="round"/></svg>`,
+            // 2: Pastel Bear
+            `<svg viewBox="0 0 64 64" class="w-full h-full"><rect width="64" height="64" fill="#FFF1E6"/><circle cx="17" cy="22" r="7" fill="#F2D0B6" stroke="#D9A886" stroke-width="2"/><circle cx="47" cy="22" r="7" fill="#F2D0B6" stroke="#D9A886" stroke-width="2"/><circle cx="17" cy="22" r="3.5" fill="#FFE6D4"/><circle cx="47" cy="22" r="3.5" fill="#FFE6D4"/><circle cx="32" cy="38" r="18" fill="#F2D0B6" stroke="#D9A886" stroke-width="2"/><ellipse cx="32" cy="43" rx="7" ry="5.5" fill="#FFF6EE"/><circle cx="25" cy="36" r="2.5" fill="#5A4A66"/><circle cx="39" cy="36" r="2.5" fill="#5A4A66"/><circle cx="32" cy="41" r="2" fill="#8B6BB1"/><ellipse cx="19" cy="42" rx="3" ry="1.8" fill="#FFAEC9" opacity="0.8"/><ellipse cx="45" cy="42" rx="3" ry="1.8" fill="#FFAEC9" opacity="0.8"/></svg>`,
+            // 3: Pastel Puppy
+            `<svg viewBox="0 0 64 64" class="w-full h-full"><rect width="64" height="64" fill="#E9F9F1"/><ellipse cx="15" cy="35" rx="6" ry="12" transform="rotate(14 15 35)" fill="#E6C9B0" stroke="#C8A58A" stroke-width="2"/><ellipse cx="49" cy="35" rx="6" ry="12" transform="rotate(-14 49 35)" fill="#E6C9B0" stroke="#C8A58A" stroke-width="2"/><circle cx="32" cy="36" r="17" fill="#FFF9F2" stroke="#D8BEA8" stroke-width="2"/><circle cx="25" cy="35" r="2.5" fill="#5A4A66"/><circle cx="39" cy="35" r="2.5" fill="#5A4A66"/><ellipse cx="20" cy="40" rx="3.2" ry="1.8" fill="#FFB3CE"/><ellipse cx="44" cy="40" rx="3.2" ry="1.8" fill="#FFB3CE"/><path d="M29 41 Q32 44 35 41" fill="none" stroke="#8B6BB1" stroke-width="2" stroke-linecap="round"/></svg>`,
+            // 4: Pastel Chick
+            `<svg viewBox="0 0 64 64" class="w-full h-full"><rect width="64" height="64" fill="#FFF8DB"/><path d="M32 14 Q36 8 38 15 Q42 11 40 18" fill="none" stroke="#F4C753" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="38" r="18" fill="#FFE994" stroke="#F4C753" stroke-width="2"/><circle cx="25" cy="36" r="2.5" fill="#5A4A66"/><circle cx="39" cy="36" r="2.5" fill="#5A4A66"/><polygon points="29,40 35,40 32,45" fill="#FF9E7D"/><ellipse cx="19" cy="41" rx="3.2" ry="1.8" fill="#FFABC7" opacity="0.85"/><ellipse cx="45" cy="41" rx="3.2" ry="1.8" fill="#FFABC7" opacity="0.85"/></svg>`,
+            // 5: Pastel Hamster
+            `<svg viewBox="0 0 64 64" class="w-full h-full"><rect width="64" height="64" fill="#FCEBFF"/><circle cx="18" cy="23" r="6" fill="#FFD9B8" stroke="#E6B28A" stroke-width="2"/><circle cx="46" cy="23" r="6" fill="#FFD9B8" stroke="#E6B28A" stroke-width="2"/><ellipse cx="32" cy="39" rx="19" ry="17" fill="#FFE6CC" stroke="#E6B28A" stroke-width="2"/><circle cx="24" cy="37" r="2.5" fill="#5A4A66"/><circle cx="40" cy="37" r="2.5" fill="#5A4A66"/><circle cx="19" cy="43" r="4" fill="#FFB3CE" opacity="0.75"/><circle cx="45" cy="43" r="4" fill="#FFB3CE" opacity="0.75"/><path d="M29 42 Q32 45 35 42" fill="none" stroke="#8B6BB1" stroke-width="2" stroke-linecap="round"/></svg>`
+        ];
+
+        function isImageUrl(val) {
+            return /^(https?:\/\/|data:image\/|\/|\.\/)/i.test(String(val || '').trim());
+        }
+
+        function getActiveChatAvatars() {
+            if (!Array.isArray(appData.chatAvatars)) return [];
+            return appData.chatAvatars.slice(0, 6).map(v => String(v || '').trim()).filter(v => v.length > 0);
+        }
+
+        function renderAvatarValueMarkup(val, fallbackIdx) {
+            const safeIdx = Math.abs(fallbackIdx || 0) % CHAT_AVATARS.length;
+            const trimmed = String(val || '').trim();
+            if (!trimmed) {
+                return CHAT_AVATARS[safeIdx];
+            }
+            if (isImageUrl(trimmed)) {
+                return `<img src="${escapeAttr(trimmed)}" alt="Avatar" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML = CHAT_AVATARS[${safeIdx}]">`;
+            }
+            return `<span class="text-[20px] leading-none select-none flex items-center justify-center w-full h-full" style="background-color: var(--th-phoneBg)">${escapeAttr(trimmed)}</span>`;
+        }
+
+        function getAvatarMarkup(review, seqIndex) {
+            const idx = typeof seqIndex === 'number' ? seqIndex : Math.abs((review.id || 1) + (review.name ? review.name.length : 0));
+            const activeAvatars = getActiveChatAvatars();
+            if (activeAvatars.length > 0) {
+                const chosen = activeAvatars[idx % activeAvatars.length];
+                return renderAvatarValueMarkup(chosen, idx);
+            }
+            return CHAT_AVATARS[idx % CHAT_AVATARS.length];
+        }
+
+        function refreshRenderedChatAvatars() {
+            document.querySelectorAll('#chat-container .chat-avatar-inner[data-avatar-seq]').forEach(el => {
+                const seq = Number(el.getAttribute('data-avatar-seq')) || 0;
+                el.innerHTML = getAvatarMarkup({}, seq);
+            });
+        }
+
+        function renderAdminAvatarInputs() {
+            const container = document.getElementById('admin-avatar-inputs');
+            if (!container) return;
+            const slots = Array.isArray(appData.chatAvatars) ? appData.chatAvatars : ['', '', '', '', '', ''];
+            container.innerHTML = Array.from({ length: 6 }, (_, i) => {
+                const val = slots[i] || '';
+                return `
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border border-white shadow-sm shrink-0 flex items-center justify-center bg-white" id="avatar-preview-${i}">
+                            ${renderAvatarValueMarkup(val, i)}
+                        </div>
+                        <input type="text" id="set-avatar-${i}" value="${escapeAttr(val)}" oninput="updateAdminAvatarPreview(${i}, this.value)"
+                            placeholder="แบบที่ ${i + 1}: วางลิงก์รูป หรือ อิโมจิ (เช่น 🐰)"
+                            class="flex-1 border rounded-xl px-2.5 py-2 text-[11px] focus:outline-none bg-white border-gray-200">
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateAdminAvatarPreview(index, value) {
+            const previewEl = document.getElementById(`avatar-preview-${index}`);
+            if (previewEl) {
+                previewEl.innerHTML = renderAvatarValueMarkup(value, index);
+            }
+        }
+
+        function openPhotoPreview(src, caption) {
+            document.getElementById('photo-preview-img').src = src;
+            document.getElementById('photo-preview-caption').textContent = caption || 'รูปหลักฐานแจ้งปัญหา';
+            document.getElementById('photo-preview-modal').classList.add('active');
+        }
+
+        /* -------------------------------------
+         * Cute Pastel Music Engine (Tone.js)
+         * ------------------------------------- */
+        const MUSIC_TRACKS = [
+            {
+                id: 'musicbox',
+                name: 'Pastel Box ✨',
+                fullName: 'กล่องดนตรีพาสเทล ✨',
+                bpm: 102,
+                osc: 'triangle',
+                melody: [
+                    'C5', 'E5', 'G5', 'B5', 'A5', 'G5', 'E5', 'D5',
+                    'F5', 'A5', 'C6', 'A5', 'G5', 'E5', 'D5', null,
+                    'E5', 'G5', 'B5', 'C6', 'D6', 'C6', 'A5', 'G5',
+                    'F5', 'E5', 'D5', 'G5', 'C5', null, 'G4', null
+                ],
+                chords: [
+                    ['C4', 'E4', 'G4'], null, null, null, ['A3', 'C4', 'E4'], null, null, null,
+                    ['F3', 'A3', 'C4'], null, null, null, ['G3', 'B3', 'D4'], null, null, null,
+                    ['E3', 'G3', 'B3'], null, null, null, ['A3', 'C4', 'E4'], null, null, null,
+                    ['F3', 'A3', 'C4'], null, ['G3', 'B3', 'D4'], null, ['C4', 'E4', 'G4'], null, null, null
+                ]
+            },
+            {
+                id: 'cafe',
+                name: 'Berry Cafe 🍓',
+                fullName: 'คาเฟ่สตรอว์เบอร์รี 🍓',
+                bpm: 88,
+                osc: 'sine',
+                melody: [
+                    'E5', null, 'G5', 'A5', 'B5', null, 'A5', 'G5',
+                    'A5', null, 'E5', 'D5', 'C5', null, 'D5', 'E5',
+                    'F5', 'A5', 'G5', 'E5', 'D5', null, 'E5', 'G5',
+                    'E5', null, 'D5', 'C5', 'C5', null, null, null
+                ],
+                chords: [
+                    ['C4', 'E4', 'G4', 'B4'], null, null, null, ['A3', 'C4', 'E4', 'G4'], null, null, null,
+                    ['F3', 'A3', 'C4', 'E4'], null, null, null, ['G3', 'B3', 'D4', 'F4'], null, null, null,
+                    ['D3', 'F3', 'A3', 'C4'], null, null, null, ['G3', 'B3', 'D4', 'E4'], null, null, null,
+                    ['C4', 'E4', 'G4', 'B4'], null, null, null, ['C4', 'E4', 'G4'], null, null, null
+                ]
+            },
+            {
+                id: 'dream',
+                name: 'Cloud Pop 🌸',
+                fullName: 'ดรีมป๊อปฟรุ้งฟริ้ง 🌸',
+                bpm: 112,
+                osc: 'triangle',
+                melody: [
+                    'G5', 'A5', 'C6', null, 'A5', 'G5', 'E5', null,
+                    'D5', 'E5', 'G5', 'A5', 'G5', null, 'E5', null,
+                    'C6', 'D6', 'E6', 'C6', 'A5', 'G5', 'A5', 'C6',
+                    'D6', 'C6', 'A5', 'G5', 'C6', null, null, null
+                ],
+                chords: [
+                    ['C4', 'G4'], null, ['E4', 'G4'], null, ['A3', 'E4'], null, ['C4', 'E4'], null,
+                    ['F3', 'C4'], null, ['A3', 'C4'], null, ['G3', 'D4'], null, ['B3', 'D4'], null,
+                    ['F3', 'A3', 'C4'], null, ['G3', 'B3', 'D4'], null, ['E3', 'G3', 'B3'], null, ['A3', 'C4', 'E4'], null,
+                    ['F3', 'A3', 'C4'], null, ['G3', 'B3', 'D4'], null, ['C4', 'E4', 'G4'], null, null, null
+                ]
+            }
+        ];
+
+        let isMusicPlaying = false;
+        let currentTrackIdx = 0;
+        let chatSfxEnabled = true;
+        let musicVolDb = -14;
+        let melodySynth = null;
+        let padSynth = null;
+        let sfxSynth = null;
+        let musicLoop = null;
+        let noteFloatInterval = null;
+        let audioInitialized = false;
+
+        function initAudioEngine() {
+            if (audioInitialized || typeof Tone === 'undefined') return;
+            try {
+                melodySynth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: 'triangle' },
+                    envelope: { attack: 0.02, decay: 0.25, sustain: 0.15, release: 0.85 }
+                }).toDestination();
+
+                padSynth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: 'sine' },
+                    envelope: { attack: 0.18, decay: 0.4, sustain: 0.25, release: 1.4 }
+                }).toDestination();
+
+                sfxSynth = new Tone.Synth({
+                    oscillator: { type: 'sine' },
+                    envelope: { attack: 0.008, decay: 0.12, sustain: 0.0, release: 0.12 }
+                }).toDestination();
+
+                melodySynth.volume.value = musicVolDb;
+                padSynth.volume.value = musicVolDb - 8;
+                sfxSynth.volume.value = musicVolDb - 4;
+                audioInitialized = true;
+            } catch (err) {
+                console.warn('Audio init skipped:', err);
+            }
+        }
+
+        function startCurrentTrack() {
+            if (typeof Tone === 'undefined') {
+                showToast('ไม่สามารถโหลดระบบเสียงได้ในขณะนี้');
+                return;
+            }
+            try {
+                initAudioEngine();
+                const track = MUSIC_TRACKS[currentTrackIdx];
+                if (musicLoop) {
+                    musicLoop.stop();
+                    musicLoop.dispose();
+                    musicLoop = null;
+                }
+                Tone.Transport.stop();
+                Tone.Transport.bpm.value = track.bpm;
+                if (melodySynth) {
+                    melodySynth.set({ oscillator: { type: track.osc } });
+                }
+
+                let step = 0;
+                musicLoop = new Tone.Loop((time) => {
+                    const note = track.melody[step % track.melody.length];
+                    const chord = track.chords[step % track.chords.length];
+                    if (note && melodySynth) {
+                        melodySynth.triggerAttackRelease(note, '8n', time);
+                    }
+                    if (chord && padSynth) {
+                        padSynth.triggerAttackRelease(chord, '2n', time);
+                    }
+                    step++;
+                }, '8n').start(0);
+
+                Tone.Transport.start();
+                isMusicPlaying = true;
+                updateMusicUI();
+                startFloatingNotes();
+            } catch (err) {
+                console.warn('Start track error:', err);
+            }
+        }
+
+        function stopMusic() {
+            try {
+                if (typeof Tone !== 'undefined') {
+                    Tone.Transport.stop();
+                }
+                if (musicLoop) {
+                    musicLoop.stop();
+                }
+            } catch (err) {}
+            isMusicPlaying = false;
+            stopFloatingNotes();
+            updateMusicUI();
+        }
+
+        async function toggleMusicPlay() {
+            if (typeof Tone === 'undefined') {
+                showToast('ระบบเสียงยังไม่พร้อมใช้งาน');
+                return;
+            }
+            try {
+                await Tone.start();
+                if (isMusicPlaying) {
+                    stopMusic();
+                    showToast('พักเพลงชั่วคราว 🎵');
+                } else {
+                    startCurrentTrack();
+                    showToast(`กำลังเล่น: ${MUSIC_TRACKS[currentTrackIdx].fullName}`);
+                }
+            } catch (err) {
+                showToast('แตะอีกครั้งเพื่อเปิดเพลง 🎵');
+            }
+        }
+
+        async function selectMusicTrack(index) {
+            currentTrackIdx = index;
+            renderTrackList();
+            try {
+                if (typeof Tone !== 'undefined') {
+                    await Tone.start();
+                    startCurrentTrack();
+                    showToast(`เปลี่ยนเพลง: ${MUSIC_TRACKS[currentTrackIdx].fullName}`);
+                }
+            } catch (err) {}
+        }
+
+        function updateMusicVolume(val) {
+            musicVolDb = Number(val);
+            if (melodySynth) melodySynth.volume.value = musicVolDb;
+            if (padSynth) padSynth.volume.value = musicVolDb - 8;
+            if (sfxSynth) sfxSynth.volume.value = musicVolDb - 4;
+        }
+
+        function toggleChatSfx(checked) {
+            chatSfxEnabled = checked;
+            if (checked && audioInitialized) {
+                playChatPopSound();
+            }
+        }
+
+        function playChatPopSound() {
+            if (!chatSfxEnabled || !isMusicPlaying || !sfxSynth || typeof Tone === 'undefined') return;
+            try {
+                const now = Tone.now();
+                sfxSynth.triggerAttackRelease('C6', '32n', now);
+                sfxSynth.triggerAttackRelease('E6', '32n', now + 0.055);
+            } catch (err) {}
+        }
+
+        function spawnFloatingNote() {
+            const wrap = document.getElementById('music-widget-wrap');
+            if (!wrap) return;
+            const symbols = ['♪', '♫', '✦', '♡'];
+            const el = document.createElement('span');
+            el.className = 'music-note-particle';
+            el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            el.style.left = `${8 + Math.random() * 26}px`;
+            el.style.top = '-4px';
+            el.style.setProperty('--nx', `${(Math.random() - 0.5) * 28}px`);
+            wrap.appendChild(el);
+            setTimeout(() => el.remove(), 1850);
+        }
+
+        function startFloatingNotes() {
+            stopFloatingNotes();
+            spawnFloatingNote();
+            noteFloatInterval = setInterval(spawnFloatingNote, 1300);
+        }
+
+        function stopFloatingNotes() {
+            if (noteFloatInterval) {
+                clearInterval(noteFloatInterval);
+                noteFloatInterval = null;
+            }
+        }
+
+        function updateMusicUI() {
+            const disc = document.getElementById('music-disc');
+            const eq = document.getElementById('music-eq');
+            const label = document.getElementById('music-status-label');
+            const icon = document.getElementById('music-disc-icon');
+            const track = MUSIC_TRACKS[currentTrackIdx];
+
+            if (isMusicPlaying) {
+                disc.classList.add('spinning');
+                eq.classList.add('playing');
+                label.textContent = track.name;
+                icon.className = 'fa-solid fa-pause';
+            } else {
+                disc.classList.remove('spinning');
+                eq.classList.remove('playing');
+                label.textContent = 'เปิดเพลง 🎵';
+                icon.className = 'fa-solid fa-music';
+            }
+            renderTrackList();
+        }
+
+        function renderTrackList() {
+            const list = document.getElementById('music-track-list');
+            if (!list) return;
+            list.innerHTML = MUSIC_TRACKS.map((tr, i) => {
+                const active = i === currentTrackIdx;
+                return `
+                    <button onclick="selectMusicTrack(${i})" class="w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-[10px] font-bold transition-all btn-press border"
+                        style="${active ? 'background-color: var(--th-phoneBg); border-color: var(--th-lilacMid); color: var(--th-lilacDark);' : 'background-color: #fff; border-color: #f3f4f6; color: #6b7280;'}">
+                        <span class="truncate">${tr.fullName}</span>
+                        <i class="fa-solid ${active && isMusicPlaying ? 'fa-volume-high' : 'fa-play'} text-[9px]"></i>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function toggleMusicMenu(e) {
+            if (e) e.stopPropagation();
+            const pop = document.getElementById('music-popover');
+            pop.classList.toggle('open');
+        }
+        function closeMusicMenu() {
+            const pop = document.getElementById('music-popover');
+            if (pop) pop.classList.remove('open');
+        }
+
+        // Close music popover when clicking outside
+        document.addEventListener('click', (e) => {
+            const wrap = document.getElementById('music-widget-wrap');
+            if (wrap && !wrap.contains(e.target)) {
+                closeMusicMenu();
+            }
+        });
+
+        window.addEventListener('load', () => {
+            loadTheme();
+            renderTrackList();
+            document.getElementById('app-banner').src = appData.banner;
+            document.getElementById('marquee-display').innerHTML = appData.marqueeText;
+            renderContacts();
+            updateReviewCount();
+            
+            // Preloader 
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden-preloader');
+                setTimeout(() => {
+                    document.getElementById('preloader').style.display = 'none';
+                    startChatProcess(); 
+                }, 600);
+            }, 3000);
+        });
+
+        function updateReviewCount() {
+            document.getElementById('review-count-display').innerHTML = `รีวิวทั้งหมด ${appData.reviews.length} รายการ 💖`;
+        }
+
+        const scrollArea = document.getElementById('main-scroll-area');
+        
+        function smoothScrollToBottom() {
+            if(scrollArea && !isUserInteracting) {
+                scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: 'smooth' });
+            }
+        }
+
+        // Demo IDs 1–3 are already listed newest first; submitted IDs are timestamps.
+        const reviewQueue = appData.reviews.slice().sort((a, b) => {
+            const order = r => r.id <= 3 ? -r.id : r.id;
+            return order(a) - order(b);
+        });
+        let chatIndex = 0;
+        let isUserInteracting = false;
+        if (scrollArea) {
+            const pauseFollowing = () => { isUserInteracting = true; };
+            scrollArea.addEventListener('wheel', pauseFollowing, { passive: true });
+            scrollArea.addEventListener('touchmove', pauseFollowing, { passive: true });
+            scrollArea.addEventListener('pointerdown', pauseFollowing, { passive: true });
+            scrollArea.addEventListener('scroll', () => {
+                if (scrollArea.scrollHeight - scrollArea.clientHeight - scrollArea.scrollTop < 24) {
+                    isUserInteracting = false;
+                }
+            }, { passive: true });
+        }
+
+        function createTypingRow(review, seqIndex) {
+            const sideClass = review.isRight ? 'right' : 'left';
+            const row = document.createElement('div');
+            row.className = `typing-row ${sideClass}`;
+            row.innerHTML = `
+                <div class="chat-avatar-wrap">
+                    <div class="chat-avatar-inner" data-avatar-seq="${seqIndex}">${getAvatarMarkup(review, seqIndex)}</div>
+                    <span class="chat-avatar-dot"></span>
+                </div>
+                <div class="typing-bubble ${sideClass}">
+                    <div class="typing-indicator"><span></span><span></span><span></span></div>
+                </div>
+            `;
+            return row;
+        }
+        
+        function startChatProcess() {
+            if (chatIndex >= reviewQueue.length) {
+                return; 
+            }
+
+            const container = document.getElementById('chat-container');
+            const spacer = document.getElementById('chat-spacer');
+            const rev = reviewQueue[chatIndex];
+            const currentSeq = chatIndex;
+            
+            const indicatorDiv = createTypingRow(rev, currentSeq);
+            container.insertBefore(indicatorDiv, spacer);
+            
+            setTimeout(() => {
+                indicatorDiv.classList.add('active');
+                smoothScrollToBottom();
+            }, 50);
+
+            const typingDuration = Math.random() * 800 + 1200; 
+            
+            setTimeout(() => {
+                indicatorDiv.style.opacity = '0';
+                indicatorDiv.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    indicatorDiv.remove();
+                    const bubble = createReviewBubble(rev, currentSeq);
+                    container.insertBefore(bubble, spacer);
+                    
+                    setTimeout(() => {
+                        bubble.classList.add('animate-chat');
+                        playChatPopSound();
+                        smoothScrollToBottom();
+                    }, 50);
+
+                    chatIndex++;
+                    const nextDelay = Math.random() * 800 + 1000;
+                    setTimeout(startChatProcess, nextDelay); 
+                }, 300);
+            }, typingDuration); 
+        }
+
+        function escapeAttr(str) {
+            return String(str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function createReviewBubble(review, seqIndex) {
+            const sideClass = review.isRight ? 'bubble-right' : 'bubble-left';
+            const rowClass = review.isRight ? 'row-right' : 'row-left';
+
+            // ดึงลูกเล่นดาววิบวับมาใช้ที่นี่
+            let starsHTML = '';
+            for(let i=0; i<5; i++) {
+                if(i < review.stars) {
+                    starsHTML += `<i class="fa-solid fa-star text-theme-star chat-star" style="animation-delay: ${i * 0.15}s"></i>`;
+                } else {
+                    starsHTML += `<i class="fa-regular fa-star chat-star" style="color: var(--th-lilac); animation-delay: ${i * 0.15}s"></i>`;
+                }
+            }
+
+            const rowDiv = document.createElement('div');
+            rowDiv.className = `chat-row ${rowClass}`;
+            rowDiv.innerHTML = `
+                <div class="chat-avatar-wrap">
+                    <div class="chat-avatar-inner" data-avatar-seq="${seqIndex}">${getAvatarMarkup(review, seqIndex)}</div>
+                    <span class="chat-avatar-dot"></span>
+                </div>
+                <div class="review-bubble ${sideClass}">
+                    <div class="flex justify-between items-start gap-2 mb-1.5">
+                        <div>
+                            <h4 class="font-cute font-bold text-[13px] leading-tight" style="color: var(--th-lilacDark)">${review.name}</h4>
+                            <div class="flex text-[9px] gap-[1px] mt-0.5">${starsHTML}</div>
+                        </div>
+                        <span class="text-[8px] text-theme-textMuted font-sans px-2 py-0.5 rounded-full border shrink-0" style="background-color: var(--th-bg); border-color: var(--th-lilac)">${review.time}</span>
+                    </div>
+                    <p class="text-xs font-sans text-theme-textMain leading-relaxed mt-1">${review.text}</p>
+                </div>
+            `;
+            return rowDiv;
+        }
+
+        function renderContacts() {
+            const container = document.getElementById('contact-links-container');
+            container.innerHTML = `
+                <a href="${appData.contacts.line}" class="contact-link-btn group relative z-10 bg-white/90">
+                    <div class="glow-bg" style="background: #00C300;"></div>
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-inner mr-4 transition-transform group-hover:scale-110" style="background: linear-gradient(135deg, #00C300, #00E000);"><i class="fa-brands fa-line text-xl"></i></div>
+                    <span class="font-sans font-bold text-sm text-gray-700 flex-1">LINE Official</span>
+                </a>
+                <a href="${appData.contacts.ig}" class="contact-link-btn group relative z-10 bg-white/90">
+                    <div class="glow-bg" style="background: #e6683c;"></div>
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-inner mr-4 transition-transform group-hover:scale-110" style="background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);"><i class="fa-brands fa-instagram text-xl"></i></div>
+                    <span class="font-sans font-bold text-sm text-gray-700 flex-1">Instagram</span>
+                </a>
+                <a href="${appData.contacts.fb}" class="contact-link-btn group relative z-10 bg-white/90">
+                    <div class="glow-bg" style="background: #1877F2;"></div>
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-inner mr-4 transition-transform group-hover:scale-110" style="background: linear-gradient(135deg, #1877F2, #4693F5);"><i class="fa-brands fa-facebook-f text-xl"></i></div>
+                    <span class="font-sans font-bold text-sm text-gray-700 flex-1">Facebook</span>
+                </a>
+            `;
+        }
+
+        function openModal(id) { 
+            closeMusicMenu();
+            document.getElementById(id).classList.add('active'); 
+            if(id === 'plus-modal') {
+                document.getElementById('plus-name').value = ''; document.getElementById('plus-text').value = '';
+                document.getElementById('plus-error').classList.add('hidden'); setStar(5);
+            }
+            if(id === 'minus-modal') {
+                ['min-fb', 'min-ig', 'min-line', 'min-x', 'min-text', 'min-img'].forEach(i => document.getElementById(i).value = '');
+                document.getElementById('minus-error').classList.add('hidden');
+            }
+        }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        let currentStoryIndex = 0; let storyTimeout; let activeStoryList = [];
+        function openHighlightGallery() {
+            closeMusicMenu();
+            const container = document.getElementById('gallery-container');
+            container.innerHTML = '';
+            appData.highlights.forEach((hl, index) => {
+                const coverImg = hl.imgs[0] || 'https://placehold.co/100x100';
+                const circle = document.createElement('div');
+                circle.className = 'flex flex-col items-center gap-1.5 w-[65px] group';
+                circle.innerHTML = `
+                    <div class="w-16 h-16 rounded-full p-1 cursor-pointer group-hover:scale-105 transition-transform border-[2px]" style="border-color: var(--th-mintMid)" onclick="openStoryViewer(${index})">
+                        <img src="${coverImg}" class="w-full h-full rounded-full object-cover border-2 border-white" onerror="this.src='https://placehold.co/100x100/FBE0EE/8B6BB1?text=HL'">
+                    </div>
+                    <span class="text-[9px] font-sans font-medium text-theme-textMain truncate w-full text-center bg-white/50 rounded-full px-1 py-0.5 border border-white/50">${hl.title}</span>
+                `;
+                container.appendChild(circle);
+            });
+            document.getElementById('highlight-gallery-bg').classList.add('active');
+            document.getElementById('highlight-gallery-modal').classList.add('active');
+        }
+        function closeHighlightGallery() { 
+            document.getElementById('highlight-gallery-bg').classList.remove('active');
+            document.getElementById('highlight-gallery-modal').classList.remove('active'); 
+        }
+
+        function openStoryViewer(index) {
+            activeStoryList = appData.highlights[index].imgs || [];
+            if(activeStoryList.length === 0) return;
+            document.getElementById('story-text-title').innerText = appData.highlights[index].title;
+            document.getElementById('story-modal').classList.add('active');
+            playStory(0);
+        }
+
+        function playStory(index) {
+            clearTimeout(storyTimeout);
+            currentStoryIndex = index;
+            document.getElementById('story-img').src = activeStoryList[index];
+
+            const progContainer = document.getElementById('story-progress-container');
+            progContainer.innerHTML = activeStoryList.map((_, i) => `<div class="story-progress-bar"><div id="story-prog-${i}" class="story-progress-fill"></div></div>`).join('');
+
+            for(let i=0; i<activeStoryList.length; i++) {
+                const bar = document.getElementById(`story-prog-${i}`);
+                if(i < index) bar.classList.add('completed');
+                else if(i === index) { void bar.offsetWidth; bar.classList.add('active'); }
+            }
+            storyTimeout = setTimeout(nextStory, 4000);
+        }
+        function nextStory() { if(currentStoryIndex < activeStoryList.length - 1) playStory(currentStoryIndex + 1); else closeStory(); }
+        function closeStory(e) { if(e) e.stopPropagation(); document.getElementById('story-modal').classList.remove('active'); clearTimeout(storyTimeout); }
+
+        let currentPlusStar = 5;
+        function setStar(count) {
+            currentPlusStar = count;
+            const stars = document.getElementById('plus-stars').children;
+            for(let i=0; i<5; i++) {
+                // ล้างคลาสแอนิเมชันเก่าออกก่อนเพื่อเริ่มใหม่
+                stars[i].classList.remove('star-anim-active');
+                
+                // Force Reflow เพื่อให้ CSS แอนิเมชันเล่นซ้ำเมื่อกดดาว
+                void stars[i].offsetWidth;
+
+                if (i < count) {
+                    stars[i].className = 'fa-solid fa-star cursor-pointer hover:scale-125 text-theme-star transition-transform star-anim-active';
+                    stars[i].style.color = '';
+                } else {
+                    stars[i].className = 'fa-solid fa-star cursor-pointer hover:scale-125 transition-transform'; 
+                    stars[i].style.color = 'var(--th-lilac)'; 
+                }
+            }
+        }
+
+        function submitPlusReview() {
+            const name = document.getElementById('plus-name').value.trim(); const text = document.getElementById('plus-text').value.trim();
+            if(!name || !text) { document.getElementById('plus-error').classList.remove('hidden'); return; }
+            
+            const newRev = { id: Date.now(), name, text, stars: currentPlusStar, img: null, time: 'เมื่อสักครู่', isRight: appData.reviews.length % 2 !== 0 };
+            appData.reviews.push(newRev); saveData(); updateReviewCount(); closeModal('plus-modal');
+            
+            if (chatIndex < reviewQueue.length) {
+                reviewQueue.push(newRev);
+                return;
+            }
+            const nextSeq = chatIndex;
+            chatIndex++;
+            const container = document.getElementById('chat-container'); const spacer = document.getElementById('chat-spacer');
+            const indicatorDiv = createTypingRow(newRev, nextSeq);
+            container.insertBefore(indicatorDiv, spacer);
+            
+            setTimeout(() => { indicatorDiv.classList.add('active'); smoothScrollToBottom(); }, 50);
+            setTimeout(() => {
+                indicatorDiv.style.opacity = '0'; indicatorDiv.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    const bubble = createReviewBubble(newRev, nextSeq); indicatorDiv.replaceWith(bubble);
+                    setTimeout(() => {
+                        bubble.classList.add('animate-chat');
+                        playChatPopSound();
+                        smoothScrollToBottom();
+                    }, 50);
+                }, 300);
+            }, 1500);
+        }
+
+        function submitMinusReview() {
+            const data = {
+                fb: document.getElementById('min-fb').value.trim(),
+                ig: document.getElementById('min-ig').value.trim(),
+                line: document.getElementById('min-line').value.trim(),
+                x: document.getElementById('min-x').value.trim(),
+                text: document.getElementById('min-text').value.trim(),
+                img: document.getElementById('min-img').value.trim() || null
+            };
+            if(!data.fb || !data.ig || !data.line || !data.x || !data.text) { document.getElementById('minus-error').classList.remove('hidden'); return; }
+            appData.complaints.push({ id: Date.now(), ...data }); saveData(); closeModal('minus-modal'); showToast('ส่งเรื่องให้แอดมินตรวจสอบเรียบร้อยค่ะ');
+        }
+
+        function openAdmin() { closeMusicMenu(); document.getElementById('admin-modal').classList.add('active'); switchAdminTab('reviews'); }
+        function closeAdmin() { document.getElementById('admin-modal').classList.remove('active'); }
+
+        function changeTheme(themeName) {
+            appData.theme = themeName; 
+            saveData(); 
+            loadTheme();
+            showToast('เปลี่ยนโทนสีเรียบร้อยแล้วค่ะ ✨');
+        }
+
+        function switchAdminTab(tab) {
+            ['reviews', 'highlights', 'settings'].forEach(t => {
+                document.getElementById(`admin-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).className = 'flex-1 py-3 text-gray-400 border-b-2 border-transparent transition-colors';
+                document.getElementById(`tab-${t}`).style = '';
+            });
+            document.getElementById(`admin-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).className = 'flex-1 py-3 font-bold border-b-2 transition-colors';
+            document.getElementById(`tab-${tab}`).style = 'color: var(--th-lilacDark); border-color: var(--th-lilacDark)';
+
+            if(tab === 'reviews') {
+                document.getElementById('admin-complaints-list').innerHTML = appData.complaints.map((c,i) => `
+                    <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-[10px]">
+                        <button onclick="appData.complaints.splice(${i},1);saveData();switchAdminTab('reviews')" class="text-gray-400 hover:text-red-500 float-right p-1"><i class="fa-solid fa-trash"></i></button>
+                        <p class="text-xs font-bold mb-1 text-red-500">${c.text}</p>
+                        FB: ${c.fb} | IG: ${c.ig}<br>Line: ${c.line} | X: ${c.x}
+                        ${c.img ? `<div class="mt-2"><img src="${escapeAttr(c.img)}" alt="หลักฐาน" onclick="openPhotoPreview('${escapeAttr(c.img)}', 'รูปหลักฐานแจ้งปัญหา')" class="w-24 h-16 object-cover rounded-lg border border-gray-200 cursor-pointer hover:opacity-90" onerror="this.src='https://placehold.co/240x160/FBE0EE/8B6BB1?text=Image'"></div>` : ''}
+                    </div>
+                `).join('') || '<p class="text-xs text-center text-gray-400 py-4">ไม่มีข้อมูล</p>';
+                document.getElementById('admin-public-reviews').innerHTML = appData.reviews.slice().reverse().map((r,i) => `<div class="bg-gray-50 p-3 rounded-xl border border-gray-100 flex justify-between gap-2"><div class="text-[10px]"><span class="font-bold text-xs text-green-600">${r.name}</span> (${r.stars} ดาว)<br><span class="text-gray-700 mt-1 block">${r.text}</span></div><button onclick="appData.reviews.splice(${appData.reviews.length-1-i},1);saveData();updateReviewCount();switchAdminTab('reviews')" class="text-gray-400 hover:text-red-500 p-1 h-fit"><i class="fa-solid fa-trash"></i></button></div>`).join('') || '<p class="text-xs text-center text-gray-400 py-4">ไม่มีข้อมูล</p>';
+            }
+            if(tab === 'highlights') { renderAdminHighlights(); }
+            if(tab === 'settings') {
+                renderAdminAvatarInputs();
+                document.getElementById('set-marquee').value = appData.marqueeText;
+                document.getElementById('set-banner').value = appData.banner;
+                document.getElementById('set-fb').value = appData.contacts.fb;
+                document.getElementById('set-ig').value = appData.contacts.ig;
+                document.getElementById('set-line').value = appData.contacts.line;
+                
+                document.getElementById('c-bg').value = appData.customColors.bg;
+                document.getElementById('c-phone').value = appData.customColors.phoneBg;
+                document.getElementById('c-main').value = appData.customColors.main;
+                document.getElementById('c-sub').value = appData.customColors.sub;
+            }
+        }
+
+        function deleteHighlightConfirm(index) {
+            showConfirmModal('ต้องการลบไฮไลท์นี้ใช่หรือไม่?', () => {
+                appData.highlights.splice(index, 1);
+                saveData();
+                renderAdminHighlights();
+                showToast('ลบไฮไลท์เรียบร้อยแล้วค่ะ');
+            });
+        }
+
+        function renderAdminHighlights() {
+            document.getElementById('admin-hl-list').innerHTML = appData.highlights.map((hl, i) => `
+                <div class="bg-white p-3 rounded-xl border border-gray-100 flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <img src="${hl.imgs[0] || 'https://placehold.co/100x100'}" class="w-10 h-10 rounded-full object-cover border border-gray-100">
+                        <div class="text-[10px]"><span class="font-bold block text-xs" style="color: var(--th-lilacDark)">${hl.title}</span><span class="text-gray-400">${hl.imgs.length} รูป</span></div>
+                    </div>
+                    <div class="flex gap-1">
+                        <button onclick="editHighlight(${hl.id})" class="text-green-500 hover:text-green-600 p-2"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteHighlightConfirm(${i})" class="text-gray-300 hover:text-red-500 p-2"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('') || '<p class="text-xs text-center text-gray-400 py-4">ไม่มีข้อมูล</p>';
+        }
+
+        function editHighlight(id) {
+            const hl = appData.highlights.find(h => h.id === id);
+            if(!hl) return;
+            document.getElementById('edit-hl-id').value = hl.id; document.getElementById('new-hl-title').value = hl.title;
+            document.getElementById('new-hl-imgs').value = (hl.imgs || []).join('\n');
+            document.getElementById('hl-form-title').innerText = 'แก้ไขไฮไลท์'; document.getElementById('btn-cancel-hl').classList.remove('hidden');
+        }
+        function cancelEditHighlight() {
+            document.getElementById('edit-hl-id').value = ''; document.getElementById('new-hl-title').value = ''; document.getElementById('new-hl-imgs').value = '';
+            document.getElementById('hl-form-title').innerText = 'เพิ่ม/แก้ไข ไฮไลท์'; document.getElementById('btn-cancel-hl').classList.add('hidden');
+        }
+        function saveHighlight() {
+            const id = document.getElementById('edit-hl-id').value; const title = document.getElementById('new-hl-title').value.trim();
+            const imgsArray = document.getElementById('new-hl-imgs').value.trim().split('\n').map(u => u.trim()).filter(u => u);
+            if(!title || imgsArray.length === 0) return showToast("กรุณากรอกชื่อและรูปอย่างน้อย 1 รูป");
+            if(id) { const index = appData.highlights.findIndex(h => h.id == id); if(index > -1) { appData.highlights[index].title = title; appData.highlights[index].imgs = imgsArray; } } 
+            else { appData.highlights.push({ id: Date.now(), title, imgs: imgsArray }); }
+            saveData(); cancelEditHighlight(); renderAdminHighlights();
+            showToast('บันทึกไฮไลท์เรียบร้อยแล้วค่ะ ✨');
+        }
+
+        function saveSettings() {
+            const cBg = document.getElementById('c-bg').value;
+            const cPhone = document.getElementById('c-phone').value;
+            const cMain = document.getElementById('c-main').value;
+            const cSub = document.getElementById('c-sub').value;
+            
+            if(cBg !== appData.customColors.bg || cPhone !== appData.customColors.phoneBg || cMain !== appData.customColors.main || cSub !== appData.customColors.sub) {
+                appData.theme = 'custom';
+                appData.customColors = { bg: cBg, phoneBg: cPhone, main: cMain, sub: cSub };
+            }
+
+            appData.marqueeText = document.getElementById('set-marquee').value.trim() || appData.marqueeText;
+            appData.banner = document.getElementById('set-banner').value.trim() || appData.banner;
+            appData.chatAvatars = Array.from({ length: 6 }, (_, i) => {
+                const inputEl = document.getElementById(`set-avatar-${i}`);
+                return inputEl ? inputEl.value.trim() : '';
+            });
+            appData.contacts.fb = document.getElementById('set-fb').value.trim(); 
+            appData.contacts.ig = document.getElementById('set-ig').value.trim(); 
+            appData.contacts.line = document.getElementById('set-line').value.trim();
+            
+            saveData(); 
+            loadTheme();
+            refreshRenderedChatAvatars();
+            document.getElementById('app-banner').src = appData.banner; 
+            document.getElementById('marquee-display').innerHTML = appData.marqueeText;
+            renderContacts(); 
+            showToast('บันทึกการตั้งค่าเรียบร้อยแล้วค่ะ 💖');
+        }
+    </script>
+</body>
+</html>
